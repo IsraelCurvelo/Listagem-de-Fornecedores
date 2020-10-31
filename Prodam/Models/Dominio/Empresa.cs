@@ -11,5 +11,16 @@ namespace Prodam.Models.Dominio
         public String Nome { get; set; }
 
         public String Cnpj { get; set; }
+
+        public Empresa()
+        {
+        }
+
+        public Empresa(int id, string uf, string nome, string cnpj) : base(id)
+        {
+            Uf = uf;
+            Nome = nome;
+            Cnpj = cnpj;
+        }
     }
 }

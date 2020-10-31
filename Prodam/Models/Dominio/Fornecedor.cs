@@ -9,11 +9,21 @@ namespace Prodam.Models.Dominio
     {
         public String Nome { get; set; }
         public DateTime MomentoCadastro { get; set; }
-        public List<int> Telefone { get; set; }
+        public List<int> Telefone { get; set; } = new List<int>();
 
-        public Empresa Empresa { get; set; }
+        public List<Empresa> Empresas { get; set; } = new List<Empresa>();
 
         public TipoPessoa TipoPessoa { get; set; }
 
+        protected Fornecedor()
+        {
+        }
+
+        protected Fornecedor(int id, string nome, DateTime momentoCadastro, TipoPessoa tipoPessoa): base(id)
+        {
+            Nome = nome;
+            MomentoCadastro = momentoCadastro;
+            TipoPessoa = tipoPessoa;
+        }
     }
 }

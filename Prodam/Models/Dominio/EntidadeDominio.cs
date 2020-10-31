@@ -8,5 +8,16 @@ namespace Prodam.Models.Dominio
     public class EntidadeDominio
     {
         public int Id { get; set; }
+
+
+        public EntidadeDominio(int id)
+        {
+            Id = id;
+        }
+
+        public EntidadeDominio()
+        {
+
+        }
     }
 }

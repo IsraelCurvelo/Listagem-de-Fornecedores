@@ -7,18 +7,19 @@ using Prodam.Data;
 
 namespace Prodam.Controllers
 {
-    public class EmpresasController : Controller
+    public class FornecedoresController : Controller
     {
         private readonly DALContext dalContext;
 
-        public EmpresasController(DALContext dalContext)
+        public FornecedoresController(DALContext dalContext)
         {
             this.dalContext = dalContext;
         }
-
-
+        
         public IActionResult Index()
         {
+
+
             return View();
         }
     }

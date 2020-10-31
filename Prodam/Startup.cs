@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Prodam.Data;
+using Prodam.DAL;
 
 namespace Prodam
 {
@@ -39,6 +40,9 @@ namespace Prodam
             services.AddDbContext<DALContext>(options =>
                   options.UseMySql(Configuration.GetConnectionString("DALContext"),
                     builder => builder.MigrationsAssembly("Prodam")));
+
+            services.AddScoped<EmpresaDAL>();
+            services.AddScoped<FornecedorDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
