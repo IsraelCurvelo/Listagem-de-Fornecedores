@@ -13,16 +13,16 @@ namespace Prodam.Models.Dominio
         [Display(Name = "Nome")]
         public String Nome { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]      
         [DataType(DataType.Date)]        
         [Display(Name = "Data de Cadastro")]
         public DateTime MomentoCadastro { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
+        
         [Display(Name = "Tipo de Pessoa")]
         public bool TipoPessoa { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
+        [Required(ErrorMessage = "{0} obrigatório")]     
         [StringLength(11, MinimumLength = 11, ErrorMessage = "O {0} deve conter {1}caracteres")]
         [Display(Name = "CPF/CNPJ")]
         public String CpfCnpj { get; set; }

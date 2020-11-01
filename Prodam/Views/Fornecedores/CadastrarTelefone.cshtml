@@ -1,14 +1,14 @@
 ﻿@model Prodam.Models.Dominio.Telefone
 
 <form asp-action="Sair">
-    <h2>Se não deseja mais cadastrar telefone, clique aqui</h2>
+    <h3>Finalizar Cadastro</h3>
 
     <div class="form-group">
         <input type="submit" value=" FINALIZAR" class="btn btn-info" />
     </div>
 </form>
 
-<h2>Ou Cadastre um novo Telefone </h2>
+<h3>Ou Cadastre um novo Telefone </h3>
 <hr />
 <div class="row">
     <div class="col-md-5 ">
@@ -22,7 +22,7 @@
                 <input asp-for="Numero" class="form-control" />
                 <span asp-validation-for="Numero" class="text-danger"></span>
             </div>
-            
+
             <br />
             <div class="form-group">
 
@@ -35,3 +35,10 @@
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script type="text/javascript">
+    window.onload = function () {
+        alert("Se não deseja cadastrar telefone, clique em FINALIZAR");
+    };
+</script>
+            

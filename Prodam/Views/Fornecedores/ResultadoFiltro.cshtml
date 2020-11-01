@@ -1,12 +1,9 @@
 ﻿@model IEnumerable<Prodam.Models.Dominio.Fornecedor>
-@{
-    ViewData["Title"] = "Resultado da Busca";
-}
 
-<h2>@ViewData["Title"] </h2>
+<h3>Resultado da Busca </h3>
 
 
-<a asp-action="Consultar" class="btn btn-default">Voltar</a>
+<a asp-action="Filtro" class="btn btn-default">Voltar</a>
 
 
 <hr />
@@ -35,7 +32,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DadosPessoaFisica.DataNascimento)
             </th>
-                  
+
 
             <th></th>
 
@@ -66,8 +63,8 @@
                 <th>
                     @Html.DisplayFor(model => item.DadosPessoaFisica.DataNascimento)
                 </th>
-               
-               
+
+
             </tr>
         }
     </tbody>

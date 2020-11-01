@@ -20,18 +20,18 @@ namespace Prodam.Facade
 
         public void Cadastrar(EntidadeDominio entidadeDominio)
         {
-            ValidarFornecedorMenorIdade validar = new ValidarFornecedorMenorIdade();
-            var confirmacao = validar.Processar(entidadeDominio);
+           //ValidarFornecedorMenorIdade validar = new ValidarFornecedorMenorIdade();
+           // var confirmacao = validar.Processar(entidadeDominio);
 
-            if (confirmacao != null)
-            {
-                throw new Exception(confirmacao);
-            }
-            else
-            {
+           // if (confirmacao != null)
+           // {
+           //     throw new Exception(confirmacao);
+           // }
+           // else
+           // {
                 FornecedorDAL fd = new FornecedorDAL(dalContext);
                 fd.Cadastrar(entidadeDominio);
-            }
+           // }
         }
 
         public void Alterar(EntidadeDominio entidadeDominio)
@@ -49,17 +49,20 @@ namespace Prodam.Facade
         {
             return null;
         }
-
-        public List<Fornecedor> ConsultarFiltro(Fornecedor forn)
-        {
-            return null;
-        }
+      
 
         public Fornecedor ConsultarFornecedor(int id)
         {
             FornecedorDAL fd = new FornecedorDAL(dalContext);
             var result = fd.ConsultarFornecedor(id);
             return result;
+        }
+
+        public ICollection<Fornecedor> ConsultarFiltro(Fornecedor fornecedor)
+        {
+            FornecedorDAL dal = new FornecedorDAL(dalContext);
+            var consulta = dal.ConsultarFiltro(fornecedor);
+            return consulta;
         }
 
 

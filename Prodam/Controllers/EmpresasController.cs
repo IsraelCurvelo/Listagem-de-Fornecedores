@@ -40,6 +40,7 @@ namespace Prodam.Controllers
 
         public IActionResult Voltar()
         {
+
             return RedirectToAction("Filtro", "Fornecedores");
         }
     }

@@ -45,7 +45,7 @@ namespace Prodam.Controllers
         public IActionResult Cadastrar(Fornecedor fornecedor)
         {
             FornecedorFacade fc = new FornecedorFacade(dalContext);
-            fornecedor.MomentoCadastro = DateTime.Now;           
+            fornecedor.MomentoCadastro = DateTime.Today;           
            
 
             if (fornecedor.TipoPessoa)
@@ -104,7 +104,7 @@ namespace Prodam.Controllers
             TelefoneFacade facade = new TelefoneFacade(dalContext);
             facade.Cadastrar(telefone);
 
-            telefone.Numero = 0;
+            telefone.Numero = null;
 
             return RedirectToAction("CadastrarTelefone", "Fornecedores", telefone);
         }
@@ -125,6 +125,11 @@ namespace Prodam.Controllers
             var forn = facade.ConsultarFiltro(fornecedor);
 
             return View("ResultadoFiltro", forn);
+        }
+
+        public IActionResult ResultadoFiltro(ICollection<Fornecedor> fornecedores)
+        {
+            return View(fornecedores);
         }
 
         [HttpPost]

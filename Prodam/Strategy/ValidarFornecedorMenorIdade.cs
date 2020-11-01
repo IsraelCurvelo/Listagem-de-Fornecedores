@@ -10,29 +10,31 @@ namespace Prodam.Strategy
     {
         public String Processar(EntidadeDominio entidadeDominio)
         {
-            var obj = (Fornecedor)entidadeDominio;
-            if (obj.TipoPessoa == false)
-            {
-                return null;
-            }
+            /*
+          var obj = (Fornecedor)entidadeDominio;
+          if (obj.TipoPessoa == false)
+          {
+              return null;
+          }
 
-            if(obj.Empresa.Uf == "SP")
-            {
-                
-                DateTime agora = DateTime.Now;
-                TimeSpan diferenca = agora.Subtract(obj.MomentoCadastro);
 
-                if(diferenca.TotalDays < 6570)
-                {
-                    return "Fornecedor menor";
-                }
-                else
-                {
-                    return null;
-                }
+          if(obj.Empresa.Uf == "SP")
+          {
 
-            }
+              DateTime agora = DateTime.Now;
+              TimeSpan diferenca = agora.Subtract(obj.MomentoCadastro);
 
+              if(diferenca.TotalDays < 6570)
+              {
+                  return "Fornecedor menor";
+              }
+              else
+              {
+                  return null;
+              }
+
+          }
+         */
             return null;
         }
     }

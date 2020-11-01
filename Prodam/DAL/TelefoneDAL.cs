@@ -43,5 +43,11 @@ namespace Prodam.DAL
 
             return resultado;
         }
+
+        public List<Telefone> ConsultarFornecedor(int id)
+        {
+           // var list = dalContext.Telefone.Where(x => x.FornecedorId == id).ToList();
+            return null;
+        }
     }
 }

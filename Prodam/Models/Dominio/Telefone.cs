@@ -9,9 +9,9 @@ namespace Prodam.Models.Dominio
     public class Telefone : EntidadeDominio
     {
        
-        [Display(Name = "Telefone")]
-        [StringLength(11, MinimumLength = 11, ErrorMessage = "O {0} deve conter {1}caracteres")]
-        public int Numero { get; set; }
+        [Display(Name = "Telefone")]        
+        [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Digite um numero de telefone válido")]
+        public String Numero { get; set; }
 
         public int FornecedorId { get; set; }
 
@@ -19,7 +19,7 @@ namespace Prodam.Models.Dominio
         {
         }
 
-        public Telefone(int id, int numero, int fornecedor): base(id)
+        public Telefone(int id, String numero, int fornecedor): base(id)
         {
             Numero = numero;
             FornecedorId = fornecedor;
