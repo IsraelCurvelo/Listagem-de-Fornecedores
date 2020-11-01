@@ -1,6 +1,7 @@
 ﻿using Prodam.DAL;
 using Prodam.Data;
 using Prodam.Models.Dominio;
+using Prodam.Strategy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,18 @@ namespace Prodam.Facade
 
         public void Cadastrar(EntidadeDominio entidadeDominio)
         {
-            FornecedorDAL fd = new FornecedorDAL(dalContext);
-            fd.Cadastrar(entidadeDominio);
+            ValidarFornecedorMenorIdade validar = new ValidarFornecedorMenorIdade();
+            var confirmacao = validar.Processar(entidadeDominio);
+
+            if (confirmacao != null)
+            {
+                throw new Exception(confirmacao);
+            }
+            else
+            {
+                FornecedorDAL fd = new FornecedorDAL(dalContext);
+                fd.Cadastrar(entidadeDominio);
+            }
         }
 
         public void Alterar(EntidadeDominio entidadeDominio)
