@@ -19,7 +19,7 @@ namespace Prodam.Models.Dominio
         public DateTime MomentoCadastro { get; set; }
 
         
-        [Display(Name = "Tipo de Pessoa")]
+        [Display(Name = "Pessoa Fisíca?")]
         public bool TipoPessoa { get; set; }
 
         [Required(ErrorMessage = "{0} obrigatório")]     

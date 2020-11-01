@@ -27,6 +27,9 @@
                 @Html.DisplayNameFor(model => model.Empresa)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TipoPessoa)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.DadosPessoaFisica.Rg)
             </th>
             <th>
@@ -41,31 +44,34 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CpfCnpj)
-                </td>
-                <th>
-                    @Html.DisplayFor(model => item.MomentoCadastro)
-                </th>
-                <th>
-                    @Html.DisplayFor(model => item.Empresa.Nome)
-                </th>
-                <th>
-                    @Html.DisplayFor(model => item.DadosPessoaFisica.Rg)
-                </th>
-                <th>
-                    @Html.DisplayFor(model => item.DadosPessoaFisica.DataNascimento)
-                </th>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CpfCnpj)
+            </td>
+            <th>
+                @Html.DisplayFor(model => item.MomentoCadastro)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.Empresa.Nome)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.TipoPessoa)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.DadosPessoaFisica.Rg)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.DadosPessoaFisica.DataNascimento)
+            </th>
 
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>

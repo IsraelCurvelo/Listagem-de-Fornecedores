@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Prodam.Data;
 using Prodam.Facade;
 using Prodam.Models.Dominio;
@@ -28,17 +27,23 @@ namespace Prodam.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Empresa empresa)
+        public IActionResult Cadastrar(Empresa empresa)
         {
 
             EmpresaFacade cf = new EmpresaFacade(dalContext);
-             cf.Cadastrar(empresa);
+            cf.Cadastrar(empresa);
 
-            return RedirectToAction("Filtro","Fornecedores");
+            return RedirectToAction(nameof(Index));
 
         }
 
         public IActionResult Voltar()
+        {
+
+            return RedirectToAction("Filtro", "Fornecedores");
+        }
+
+        public IActionResult VoltarInicio()
         {
 
             return RedirectToAction("Filtro", "Fornecedores");

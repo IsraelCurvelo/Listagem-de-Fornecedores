@@ -132,9 +132,14 @@ namespace Prodam.Controllers
             return View(fornecedores);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public IActionResult Sair()
+        {
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult VoltarInicio()
         {
 
             return RedirectToAction("Filtro", "Fornecedores");
