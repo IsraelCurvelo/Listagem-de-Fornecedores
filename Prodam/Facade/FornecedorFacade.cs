@@ -1,4 +1,6 @@
-﻿using Prodam.DAL;
+﻿using CadastroProduto.Data.Exception;
+using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
+using Prodam.DAL;
 using Prodam.Data;
 using Prodam.Models.Dominio;
 using Prodam.Strategy;
@@ -20,18 +22,9 @@ namespace Prodam.Facade
 
         public void Cadastrar(EntidadeDominio entidadeDominio)
         {
-           //ValidarFornecedorMenorIdade validar = new ValidarFornecedorMenorIdade();
-           // var confirmacao = validar.Processar(entidadeDominio);
 
-           // if (confirmacao != null)
-           // {
-           //     throw new Exception(confirmacao);
-           // }
-           // else
-           // {
-                FornecedorDAL fd = new FornecedorDAL(dalContext);
-                fd.Cadastrar(entidadeDominio);
-           // }
+            FornecedorDAL fd = new FornecedorDAL(dalContext);
+            fd.Cadastrar(entidadeDominio);
         }
 
         public void Alterar(EntidadeDominio entidadeDominio)
@@ -65,6 +58,26 @@ namespace Prodam.Facade
             return consulta;
         }
 
+        public String CadastrarFornecedor(EntidadeDominio entidadeDominio)
+        {
+            var forne = (Fornecedor)entidadeDominio;
+            EmpresaDAL dal = new EmpresaDAL(dalContext);
+            var empresa = dal.ConsultarId(forne.EmpresaId);
+
+            ValidarFornecedorMenorIdade validar = new ValidarFornecedorMenorIdade();
+            var confirmacao = validar.Processar(forne, empresa);
+
+            if (confirmacao != null)
+            {
+                return confirmacao;
+            }
+            else
+            {
+                FornecedorDAL fd = new FornecedorDAL(dalContext);
+                fd.Cadastrar(entidadeDominio);
+                return null;
+            }
+        }
 
     }
 }

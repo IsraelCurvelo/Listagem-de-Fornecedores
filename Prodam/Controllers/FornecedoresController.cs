@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using Prodam.Data;
 using Prodam.Facade;
+using Prodam.Models;
 using Prodam.Models.Dominio;
 using Prodam.Models.ViewModels;
 
@@ -79,12 +82,18 @@ namespace Prodam.Controllers
         public IActionResult CadastrarFisica(Fornecedor fornecedor, PessoaFisica pessoaFisica)
         {
             FornecedorFacade facade = new FornecedorFacade(dalContext);            
-             facade.Cadastrar(fornecedor);
-                                 
+             var con = facade.CadastrarFornecedor(fornecedor);
+            if (con != null)
+            {
+                return RedirectToAction(nameof(Error));
+            }
+            else
+            {
 
-            Telefone tvm = new Telefone{ FornecedorId = fornecedor.Id };
-           
-            return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
+                Telefone tvm = new Telefone { FornecedorId = fornecedor.Id };
+
+                return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
+            }
         }
 
       
@@ -145,5 +154,14 @@ namespace Prodam.Controllers
             return RedirectToAction("Filtro", "Fornecedores");
         }
 
+        public IActionResult Error()
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = "Fornecedor menor de idade",
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
+        }
     }
 }

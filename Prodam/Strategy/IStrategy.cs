@@ -8,6 +8,6 @@ namespace Prodam.Strategy
 {
     public interface IStrategy
     {
-        String Processar(EntidadeDominio entidadeDominio);
+        String Processar(Fornecedor fornecedor, Empresa empresa);
     }
 }

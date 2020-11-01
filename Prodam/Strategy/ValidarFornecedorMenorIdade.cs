@@ -1,4 +1,5 @@
-﻿using Prodam.Models.Dominio;
+﻿using Prodam.DAL;
+using Prodam.Models.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +9,43 @@ namespace Prodam.Strategy
 {
     public class ValidarFornecedorMenorIdade : IStrategy
     {
-        public String Processar(EntidadeDominio entidadeDominio)
+        public String Processar(Fornecedor fornecedor, Empresa empresa)
         {
-            /*
-          var obj = (Fornecedor)entidadeDominio;
-          if (obj.TipoPessoa == false)
-          {
-              return null;
-          }
+            String estado = "SP";
+
+            if (fornecedor.TipoPessoa == false)
+            {
+                return null;
+            }
 
 
-          if(obj.Empresa.Uf == "SP")
-          {
 
-              DateTime agora = DateTime.Now;
-              TimeSpan diferenca = agora.Subtract(obj.MomentoCadastro);
+            if (empresa.Uf == estado)
+            {
+                int AnoBase = DateTime.Today.Year - 18;
 
-              if(diferenca.TotalDays < 6570)
-              {
-                  return "Fornecedor menor";
-              }
-              else
-              {
-                  return null;
-              }
+                if (fornecedor.DadosPessoaFisica.DataNascimento.Year > AnoBase)
+                {
+                    return "Fornecedor menor de idade";
+                }
 
-          }
-         */
+                if (AnoBase == fornecedor.DadosPessoaFisica.DataNascimento.Year)
+                {
+                    if (fornecedor.DadosPessoaFisica.DataNascimento.Month < DateTime.Now.Month)
+                    {
+                        return "Fornecedor menor de idade";
+                    }
+                    if (fornecedor.DadosPessoaFisica.DataNascimento.Month == DateTime.Now.Month)
+                    {
+                        if (fornecedor.DadosPessoaFisica.DataNascimento.Day <= DateTime.Now.Day)
+                        {
+                            return "Fornecedor menor de idade";
+                        }
+                    }
+                }
+                return null;
+            }
+
             return null;
         }
     }

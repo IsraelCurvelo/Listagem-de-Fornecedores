@@ -3,6 +3,7 @@ using Prodam.Models.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Prodam.DAL
@@ -44,6 +45,11 @@ namespace Prodam.DAL
             return resultado;
         }
 
+        public Empresa ConsultarId(int id)
+        {
+            var res= dalContext.Empresa.FirstOrDefault(x => x.Id == id);
+            return res;
+        }
 
 
 
