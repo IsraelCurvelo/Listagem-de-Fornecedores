@@ -18,7 +18,8 @@ namespace Prodam.DAL
 
         public void Cadastrar(EntidadeDominio entidadeDominio)
         {
-
+            dalContext.Add(entidadeDominio);
+            dalContext.SaveChanges();
         }
 
         public void Alterar(EntidadeDominio entidadeDominio)
@@ -33,7 +34,14 @@ namespace Prodam.DAL
 
         public List<EntidadeDominio> Consultar(EntidadeDominio entidadeDominio)
         {
-            return null;
+            var list = dalContext.Empresa.ToList();
+            List<EntidadeDominio> resultado = new List<EntidadeDominio>();
+            foreach (EntidadeDominio x in list)
+            {
+                resultado.Add(x);
+            }
+
+            return resultado;
         }
 
 

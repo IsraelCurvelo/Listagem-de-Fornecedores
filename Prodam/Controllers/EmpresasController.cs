@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Prodam.Data;
+using Prodam.Facade;
+using Prodam.Models.Dominio;
 
 namespace Prodam.Controllers
 {
@@ -20,6 +19,28 @@ namespace Prodam.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Empresa empresa)
+        {
+
+            EmpresaFacade cf = new EmpresaFacade(dalContext);
+             cf.Cadastrar(empresa);
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        public IActionResult Voltar()
+        {
+            return RedirectToAction("Filtro", "Fornecedores");
         }
     }
 }

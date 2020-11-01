@@ -1,4 +1,5 @@
-﻿using Prodam.Data;
+﻿using Prodam.DAL;
+using Prodam.Data;
 using Prodam.Models.Dominio;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,16 @@ namespace Prodam.Facade
             this.dalContext = dalContext;
         }
 
-        public String Cadastrar(EntidadeDominio entidadeDominio)
+        public void Cadastrar(EntidadeDominio entidadeDominio)
         {
-            return null;
+            FornecedorDAL fd = new FornecedorDAL(dalContext);
+            fd.Cadastrar(entidadeDominio);
         }
 
         public void Alterar(EntidadeDominio entidadeDominio)
         {
-
+            FornecedorDAL fd = new FornecedorDAL(dalContext);
+            fd.Alterar(entidadeDominio);
         }
 
         public void Excluir(EntidadeDominio entidadeDominio)
@@ -35,5 +38,19 @@ namespace Prodam.Facade
         {
             return null;
         }
+
+        public List<Fornecedor> ConsultarFiltro(Fornecedor forn)
+        {
+            return null;
+        }
+
+        public Fornecedor ConsultarFornecedor(int id)
+        {
+            FornecedorDAL fd = new FornecedorDAL(dalContext);
+            var result = fd.ConsultarFornecedor(id);
+            return result;
+        }
+
+
     }
 }

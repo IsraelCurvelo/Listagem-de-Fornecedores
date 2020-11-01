@@ -1,29 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Prodam.Models.Dominio
 {
-    public abstract class Fornecedor : EntidadeDominio
+    public class Fornecedor : EntidadeDominio
     {
         public String Nome { get; set; }
         public DateTime MomentoCadastro { get; set; }
-        public List<int> Telefone { get; set; } = new List<int>();
 
-        public List<Empresa> Empresas { get; set; } = new List<Empresa>();
+        public bool TipoPessoa { get; set; }        
 
-        public TipoPessoa TipoPessoa { get; set; }
+        public String CpfCnpj { get; set; }
 
-        protected Fornecedor()
+
+        public PessoaFisica DadosPessoaFisica { get; set; }
+
+        public Empresa Empresa { get; set; }
+
+        [NotMapped]
+        public ICollection<Telefone> Telefones { get; set; } = new List<Telefone>();
+
+        public int EmpresaId { get; set; }
+
+       
+
+        public Fornecedor()
         {
         }
 
-        protected Fornecedor(int id, string nome, DateTime momentoCadastro, TipoPessoa tipoPessoa): base(id)
+        public Fornecedor(int id, string nome, bool tipoPessoa, String cpfCnpj, Empresa empresa) : base(id)
         {
-            Nome = nome;
-            MomentoCadastro = momentoCadastro;
+            Nome = nome;            
             TipoPessoa = tipoPessoa;
+            CpfCnpj = cpfCnpj;
+            Empresa = empresa;
+
         }
     }
 }

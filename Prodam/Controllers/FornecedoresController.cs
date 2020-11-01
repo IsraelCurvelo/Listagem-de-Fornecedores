@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Prodam.Data;
+using Prodam.Facade;
+using Prodam.Models.Dominio;
+using Prodam.Models.ViewModels;
 
 namespace Prodam.Controllers
 {
@@ -18,9 +21,126 @@ namespace Prodam.Controllers
         
         public IActionResult Index()
         {
+            return View();        
+        }
+
+        public IActionResult Cadastrar(Empresa empresa)
+        {
+            EmpresaFacade empresaF = new EmpresaFacade(dalContext);
+            List<Empresa> resultado = new List<Empresa>();
+            foreach (EntidadeDominio x in empresaF.Consultar(empresa))
+            {
+                resultado.Add((Empresa)x);
+            }
+
+
+            var viewModel = new FornecedorViewModel { Empresas = resultado };
+
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Cadastrar(Fornecedor fornecedor)
+        {
+            FornecedorFacade fc = new FornecedorFacade(dalContext);
+            fornecedor.MomentoCadastro = DateTime.Now;           
+           
+
+            if (fornecedor.TipoPessoa)
+            {
+                return RedirectToAction("CadastrarFisica", "Fornecedores", fornecedor);
+            }
+            else
+            {
+                FornecedorFacade facade = new FornecedorFacade(dalContext);
+                facade.Cadastrar(fornecedor);
+
+
+                TelefoneViewModel tvm = new TelefoneViewModel { Fornecedor = fornecedor };
+
+                return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
+               
+            }            
+
+        }
+
+        public IActionResult CadastrarFisica (Fornecedor fornecedor)
+        {
+
+            
+            
+            return View(fornecedor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastrarFisica(Fornecedor fornecedor, PessoaFisica pessoaFisica)
+        {
+            FornecedorFacade facade = new FornecedorFacade(dalContext);            
+             facade.Cadastrar(fornecedor);
+                                 
+
+            TelefoneViewModel tvm = new TelefoneViewModel { Fornecedor = fornecedor };
+           
+            return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
+        }
+
+
+
+        public IActionResult CadastrarJuridica(Fornecedor fornecedor)
+        {
+            
+            return View(fornecedor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastrarJuridica(Fornecedor fornecedor,TelefoneViewModel tvm)
+        {
+            FornecedorFacade facade = new FornecedorFacade(dalContext);
+            facade.Cadastrar(fornecedor);
+
+
+            tvm = new TelefoneViewModel { Fornecedor = fornecedor };
+
+            return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
+        }      
+
+
+        public IActionResult CadastrarTelefone(TelefoneViewModel tvm)
+        {
+                       
+
+            return View(tvm);
+        }
+
+
+        public IActionResult Filtro()
+        {
 
 
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Filtro(Fornecedor fornecedor)
+        {
+            FornecedorFacade facade = new FornecedorFacade(dalContext);
+            var forn = facade.ConsultarFiltro(fornecedor);
+
+            return View("ResultadoFiltro", forn);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Sair()
+        {
+
+            return RedirectToAction("Filtro", "Fornecedores");
+        }
+
     }
 }

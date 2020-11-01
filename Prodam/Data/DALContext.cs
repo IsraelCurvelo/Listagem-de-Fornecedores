@@ -14,6 +14,9 @@ namespace Prodam.Data
         {
         }
 
-        public DbSet<Prodam.Models.Dominio.Empresa> Empresa { get; set; }
+        public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Fornecedor> Fornecedor { get; set; }
+        public DbSet<Telefone> Telefone { get; set; }
+        public DbSet<PessoaFisica> PessoaFisica { get; set; }
     }
 }

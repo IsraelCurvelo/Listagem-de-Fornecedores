@@ -1,0 +1,36 @@
+﻿@model Prodam.Models.Dominio.Fornecedor
+
+<hr />
+<div class="row">
+    <div class="col-md-5 ">
+
+        <form asp-action="CadastrarFisica">
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Nome" />
+            <input type="hidden" asp-for="MomentoCadastro" />
+            <input type="hidden" asp-for="Empresa" />
+            <input type="hidden" asp-for="TipoPessoa" />
+            <input type="hidden" asp-for="CpfCnpj" />
+            <input type="hidden" asp-for="EmpresaId" />
+            
+            <div class="form-group">
+                <label asp-for="DadosPessoaFisica.Rg" class="control-label"></label>
+                <input asp-for="DadosPessoaFisica.Rg" class="form-control" />
+                <span asp-validation-for="DadosPessoaFisica.Rg" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DadosPessoaFisica.DataNascimento" class="control-label"></label>
+                <input asp-for="DadosPessoaFisica.DataNascimento" class="form-control" />
+                <span asp-validation-for="DadosPessoaFisica.DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Continuar" class="btn btn-success" />
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

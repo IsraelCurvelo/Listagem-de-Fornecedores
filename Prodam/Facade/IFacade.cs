@@ -8,7 +8,7 @@ namespace Prodam.Facade
 {
     public interface IFacade
     {        
-            String Cadastrar(EntidadeDominio entidadeDominio);
+            void Cadastrar(EntidadeDominio entidadeDominio);
             void Alterar(EntidadeDominio entidadeDominio);
             void Excluir(EntidadeDominio entidadeDominio);
             List<EntidadeDominio> Consultar(EntidadeDominio entidadeDominio);       

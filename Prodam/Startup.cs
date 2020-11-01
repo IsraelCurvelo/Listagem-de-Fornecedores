@@ -43,6 +43,7 @@ namespace Prodam
 
             services.AddScoped<EmpresaDAL>();
             services.AddScoped<FornecedorDAL>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +67,7 @@ namespace Prodam
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Fornecedores}/{action=Filtro}/{id?}");
             });
         }
     }
