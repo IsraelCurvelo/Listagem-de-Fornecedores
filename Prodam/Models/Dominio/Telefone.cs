@@ -9,16 +9,16 @@ namespace Prodam.Models.Dominio
     {
         public int Numero { get; set; }
 
-        public Fornecedor Fornecedor { get; set; }
+        public int FornecedorId { get; set; }
 
         public Telefone()
         {
         }
 
-        public Telefone(int id, int numero, Fornecedor fornecedor): base(id)
+        public Telefone(int id, int numero, int fornecedor): base(id)
         {
             Numero = numero;
-            Fornecedor = fornecedor;
+            FornecedorId = fornecedor;
         }
     }
         

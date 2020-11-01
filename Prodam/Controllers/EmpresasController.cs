@@ -34,7 +34,7 @@ namespace Prodam.Controllers
             EmpresaFacade cf = new EmpresaFacade(dalContext);
              cf.Cadastrar(empresa);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Filtro","Fornecedores");
 
         }
 

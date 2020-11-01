@@ -58,7 +58,7 @@ namespace Prodam.Controllers
                 facade.Cadastrar(fornecedor);
 
 
-                TelefoneViewModel tvm = new TelefoneViewModel { Fornecedor = fornecedor };
+                Telefone tvm = new Telefone { FornecedorId = fornecedor.Id };
 
                 return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
                
@@ -82,38 +82,31 @@ namespace Prodam.Controllers
              facade.Cadastrar(fornecedor);
                                  
 
-            TelefoneViewModel tvm = new TelefoneViewModel { Fornecedor = fornecedor };
+            Telefone tvm = new Telefone{ FornecedorId = fornecedor.Id };
            
             return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
         }
 
+      
 
 
-        public IActionResult CadastrarJuridica(Fornecedor fornecedor)
-        {
-            
-            return View(fornecedor);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CadastrarJuridica(Fornecedor fornecedor,TelefoneViewModel tvm)
-        {
-            FornecedorFacade facade = new FornecedorFacade(dalContext);
-            facade.Cadastrar(fornecedor);
-
-
-            tvm = new TelefoneViewModel { Fornecedor = fornecedor };
-
-            return RedirectToAction("CadastrarTelefone", "Fornecedores", tvm);
-        }      
-
-
-        public IActionResult CadastrarTelefone(TelefoneViewModel tvm)
+        public IActionResult CadastrarTelefone(Telefone tvm)
         {
                        
 
             return View(tvm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastrarTelefonee(Telefone telefone)
+        {
+            TelefoneFacade facade = new TelefoneFacade(dalContext);
+            facade.Cadastrar(telefone);
+
+            telefone.Numero = 0;
+
+            return RedirectToAction("CadastrarTelefone", "Fornecedores", telefone);
         }
 
 

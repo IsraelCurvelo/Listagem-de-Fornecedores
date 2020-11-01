@@ -1,1 +1,37 @@
-﻿@model Prodam.Models.ViewModels.TelefoneViewModel
+﻿@model Prodam.Models.Dominio.Telefone
+
+<form asp-action="Sair">
+    <h2>Se não deseja mais cadastrar telefone, clique aqui</h2>
+
+    <div class="form-group">
+        <input type="submit" value=" FINALIZAR" class="btn btn-info" />
+    </div>
+</form>
+
+<h2>Ou Cadastre um novo Telefone </h2>
+<hr />
+<div class="row">
+    <div class="col-md-5 ">
+        <form asp-action="CadastrarTelefonee">
+
+            <hr />
+            <input type="hidden" asp-for="FornecedorId" />
+
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            
+            <br />
+            <div class="form-group">
+
+                <input type="submit" value="Continuar" class="btn btn-success" />
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
